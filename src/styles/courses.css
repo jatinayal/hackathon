@@ -1,0 +1,467 @@
+/* ==========================================================================
+   COURSES SECTION ("What We Offer") & 3D FLIP CARDS
+   ========================================================================== */
+
+.courses-section {
+  position: relative;
+  padding: 120px 0;
+  background: #000000;
+  overflow: hidden;
+}
+
+.courses-bg-glow-1 {
+  position: absolute;
+  top: 25%;
+  left: 15%;
+  width: 380px;
+  height: 380px;
+  background: rgba(113, 113, 122, 0.08);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: pulseGlow 6s ease-in-out infinite alternate;
+}
+
+.courses-bg-glow-2 {
+  position: absolute;
+  bottom: 25%;
+  right: 15%;
+  width: 380px;
+  height: 380px;
+  background: rgba(82, 82, 91, 0.08);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: pulseGlow 6s ease-in-out infinite alternate 3s;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   3D FLIP COURSE CARD
+   ========================================================================== */
+.course-card {
+  position: relative;
+  background: #0d0e12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.course-card:hover,
+.course-card.is-flipped {
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+.course-card:focus-visible {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   UPPER 3D FLIP CONTAINER
+   ========================================================================== */
+.course-flip-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  perspective: 1200px;
+  background: #14151c;
+  overflow: hidden;
+  border-top-left-radius: 23px;
+  border-top-right-radius: 23px;
+}
+
+.course-flip-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.course-card:hover .course-flip-flipper,
+.course-card.is-flipped .course-flip-flipper {
+  transform: rotateY(180deg);
+}
+
+.course-flip-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   FRONT FACE (Default View)
+   ========================================================================== */
+.course-flip-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.course-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.course-card:hover .course-flip-front .course-thumb-img,
+.course-card.is-flipped .course-flip-front .course-thumb-img {
+  transform: scale(1.05);
+}
+
+.course-front-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.5) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.course-front-overlay {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.course-front-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  margin: 0;
+}
+
+.course-front-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Badges */
+.course-badge-live {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.45);
+  z-index: 3;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  animation: livePing 1.5s infinite;
+}
+
+@keyframes livePing {
+  0% { transform: scale(0.9); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+  100% { transform: scale(0.9); opacity: 1; }
+}
+
+.badge-popular {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #facc15;
+  color: #0b0a12;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(250, 204, 21, 0.35);
+}
+
+.badge-hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   BACK FACE (Detailed Flipped View)
+   ========================================================================== */
+.course-flip-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(180deg, #14161f 0%, #0d0f15 100%);
+  padding: 16px 20px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  text-align: left;
+}
+
+.course-back-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  flex: 1;
+}
+
+.course-back-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.course-back-subtitle {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.course-back-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.course-back-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.course-back-detail-item .detail-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.course-back-bottom-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 30%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 70%, transparent 100%);
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   BOTTOM CONTENT AREA & SYNCHRONIZED FADE/SLIDE TRANSITIONS
+   ========================================================================== */
+.course-info-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 190px;
+  padding: 22px 20px 20px 20px;
+  background: radial-gradient(ellipse at 50% 120%, rgba(245, 158, 11, 0.07) 0%, rgba(13, 14, 18, 1) 70%);
+  display: grid;
+}
+
+.course-info-layer {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Front Bottom State (Default) */
+.course-info-front {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1) 0.24s,
+              transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) 0.24s;
+}
+
+.course-card:hover .course-info-front,
+.course-card.is-flipped .course-info-front {
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.2s ease-in 0s,
+              transform 0.2s ease-in 0s;
+}
+
+/* Back / Hover Bottom State */
+.course-info-back {
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.2s ease-in 0s,
+              transform 0.2s ease-in 0s;
+}
+
+.course-card:hover .course-info-back,
+.course-card.is-flipped .course-info-back {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.26s,
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) 0.26s;
+}
+
+.course-bottom-subtitle {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin: 0 0 12px 0;
+  max-width: 90%;
+}
+
+.course-bottom-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  color: #e2e8f0;
+  margin-bottom: 12px;
+}
+
+.course-bottom-meta-pill.simple-duration {
+  padding: 5px 14px;
+}
+
+.meta-divider {
+  width: 1px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.meta-icon {
+  color: #a1a1aa;
+}
+
+.meta-icon-users {
+  color: #94a3b8;
+}
+
+.course-hover-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  margin: 2px 0 12px 0;
+  border-radius: 9999px;
+}
+
+.course-explore-link {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #e4e4e7;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin-top: auto;
+}
+
+.course-explore-link:hover {
+  color: #ffffff;
+}
+
+.course-explore-link .arrow-char {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.course-card:hover .arrow-char,
+.course-card.is-flipped .arrow-char {
+  transform: translateX(4px);
+}
+
+.read-more-link {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+  }
+
+  .course-flip-container {
+    height: 230px;
+  }
+
+  .course-info-wrapper {
+    min-height: 180px;
+    padding: 18px 16px;
+  }
+}

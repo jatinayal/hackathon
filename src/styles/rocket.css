@@ -1,0 +1,652 @@
+/* ==========================================================================
+   MINIMALIST STRIKE COURSE SALE POPUP & WHITE ROCKET STYLES
+   Minimal, clean, 2-column layout (Course Image Left, Details Right)
+   ========================================================================== */
+
+/* Floating Rocket Trigger - Persistent entry point on bottom left */
+.floating-rocket-trigger {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(14, 15, 20, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 7px 15px 7px 9px;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.floating-rocket-trigger:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+}
+
+.floating-rocket-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.floating-rocket-icon-wrap svg {
+  color: #ffffff;
+}
+
+.floating-rocket-ping {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.floating-rocket-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.floating-rocket-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-display, 'Audiowide', sans-serif);
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.floating-rocket-title span {
+  color: #fbbf24;
+}
+
+.floating-rocket-sub {
+  font-size: 0.68rem;
+  color: var(--text-secondary, #94a3b8);
+  font-family: var(--font-sans, 'Inter', sans-serif);
+}
+
+/* ==========================================================================
+   SUBTLE SEMI-TRANSPARENT BACKGROUND OVERLAY
+   Website remains clearly visible behind the popup
+   ========================================================================== */
+.rocket-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.38); /* Subtle dimming: STRIKE page is clearly visible! */
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  animation: strikeModalFadeIn 0.22s forwards ease-out;
+  overflow-y: auto;
+}
+
+@keyframes strikeModalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   MINIMALIST 2-COLUMN MODAL CARD
+   ========================================================================== */
+.strike-minimal-modal {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  background: linear-gradient(165deg, #131418 0%, #0a0b0e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(245, 158, 11, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  z-index: 2010;
+}
+
+/* Subtle top highlight line */
+.rocket-modal-top-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  pointer-events: none;
+}
+
+/* Modal Controls (Float top right) */
+.minimal-modal-controls {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-icon-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary, #94a3b8);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.18s ease);
+}
+
+.action-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 2-Column Responsive Layout */
+.minimal-popup-layout {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 28px;
+  padding: 28px;
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: COURSE IMAGE & VISUAL CARD
+   ========================================================================== */
+.minimal-popup-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-visual-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  background: linear-gradient(180deg, #181a22 0%, #0a0b10 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.course-visual-bg-glow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.course-live-pill {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  z-index: 2;
+}
+
+.live-dot-pulse {
+  width: 6px;
+  height: 6px;
+  background: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ef4444;
+  animation: liveBlink 1.4s infinite;
+}
+
+@keyframes liveBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.course-visual-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  z-index: 1;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.course-visual-card:hover .course-visual-img {
+  transform: scale(1.04);
+}
+
+.course-visual-footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 16px 16px 16px;
+  background: linear-gradient(to top, rgba(10, 11, 16, 0.96) 0%, rgba(10, 11, 16, 0.78) 70%, transparent 100%);
+  margin: -16px;
+  margin-top: auto;
+  z-index: 2;
+}
+
+.course-brand-tag {
+  font-family: var(--font-display, 'Audiowide', sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #fbbf24;
+}
+
+.course-instructor-names {
+  font-size: 0.74rem;
+  color: var(--text-secondary, #94a3b8);
+  font-family: var(--font-sans, 'Inter', sans-serif);
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: COURSE DETAILS (Title, Duration, Topics, Price)
+   ========================================================================== */
+.minimal-popup-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 1. Course Title */
+.course-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.course-category-badge {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+}
+
+.course-main-title {
+  font-family: var(--font-display, 'Audiowide', sans-serif);
+  font-size: 1.35rem;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+}
+
+/* 2. Duration Bar */
+.course-duration-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* 3. Topics Covered */
+.course-topics-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.topics-heading {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+}
+
+.topics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.topics-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  line-height: 1.3;
+}
+
+/* 4. Price Section Container */
+.course-price-section {
+  position: relative;
+  background: rgba(18, 20, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 20px;
+  /* Reserve the final offer's space before ignition; scale with type/viewport. */
+  min-height: clamp(11.5rem, 10.5rem + 2vw, 12.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Teaser State: Where the white rocket docks */
+.price-teaser-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.rocket-dock-target-anchor {
+  width: 60px;
+  height: 50px;
+  pointer-events: none;
+}
+
+.rocket-minimal-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  letter-spacing: 0.03em;
+  transition: all 0.2s ease;
+}
+
+.rocket-minimal-hint.is-ready {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.rocket-minimal-hint.is-ready:hover {
+  color: #fbbf24;
+}
+
+/* Revealed State: Prices, Countdown, Coupon & CTA */
+.price-revealed-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: priceFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes priceFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.price-reveal-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.price-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.price-original {
+  font-size: 1.05rem;
+  color: #64748b;
+  text-decoration: line-through;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+}
+
+.price-discounted {
+  font-family: var(--font-display, 'Audiowide', sans-serif);
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.price-save-tag {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #4ade80;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+}
+
+.minimal-countdown-clock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #090a0f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fbbf24;
+}
+
+.minimal-coupon-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #090a0f;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+}
+
+.coupon-prefix {
+  color: #94a3b8;
+}
+
+.coupon-code {
+  font-family: var(--font-mono, 'Fira Code', monospace);
+  color: #ffffff;
+  letter-spacing: 0.05em;
+}
+
+.copy-code-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition-fast, 0.18s ease);
+}
+
+.copy-code-pill:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+.copy-code-pill.copied {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: #ffffff;
+}
+
+.minimal-claim-cta {
+  background: linear-gradient(135deg, var(--accent-gold-from, #facc15) 0%, var(--accent-gold-to, #d97706) 100%);
+  color: #000000;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.minimal-claim-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(245, 158, 11, 0.5);
+}
+
+/* ==========================================================================
+   MINIMALIST WHITE ROCKET & INTERACTIVE STATES
+   ========================================================================== */
+.rocket-viewport-element.is-clickable {
+  cursor: pointer !important;
+  transition: filter 0.25s ease;
+}
+
+.rocket-viewport-element.is-clickable:hover {
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 20px rgba(245, 158, 11, 0.6));
+
+}
+
+.rocket-viewport-element.is-clickable:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.rocket-minimal-glow-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin-left: -35px;
+  margin-top: -35px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  animation: minimalRadarPing 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes minimalRadarPing {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLETS & MOBILE VIEWPORTS)
+   ========================================================================== */
+/* Narrow price rows wrap the countdown below the prices. Reserve both rows. */
+@media (max-width: 900px) {
+  .course-price-section {
+    min-height: clamp(14rem, 13rem + 3vw, 15rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .rocket-modal-overlay {
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .strike-minimal-modal {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  .minimal-popup-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 20px 18px;
+  }
+
+  .course-visual-card {
+    min-height: 160px;
+    padding: 12px;
+  }
+
+  .course-visual-footer {
+    margin: -12px;
+    margin-top: auto;
+    padding: 10px 12px 12px 12px;
+  }
+
+  .course-main-title {
+    font-size: 1.15rem;
+  }
+
+  .price-discounted {
+    font-size: 1.5rem;
+  }
+
+  .floating-rocket-trigger {
+    bottom: 20px;
+    left: 16px;
+  }
+}
+
+
+

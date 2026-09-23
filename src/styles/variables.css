@@ -1,0 +1,50 @@
+:root {
+  /* Colors */
+  --background: #000000;
+  --background-secondary: #050505;
+  --surface: #0c0d10;
+  --surface-raised: #121318;
+  --surface-card: rgba(18, 19, 24, 0.8);
+  --surface-card-hover: rgba(26, 27, 34, 0.9);
+
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-dim: #475569;
+
+  --accent: #f59e0b;
+  --accent-gold-from: #facc15;
+  --accent-gold-to: #d97706;
+  --accent-gold-glow: rgba(245, 158, 11, 0.25);
+  --accent-silver: #e2e8f0;
+  --accent-blue: #38bdf8;
+  --accent-green: #22c55e;
+  --accent-purple: #a855f7;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --border-focus: rgba(255, 255, 255, 0.25);
+  --border-gold: rgba(245, 158, 11, 0.35);
+
+  /* Typography */
+  --font-display: 'Audiowide', cursive, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Layout */
+  --container-width: 1240px;
+  --container-narrow: 1040px;
+  --container-wide: 1400px;
+  --nav-height: 64px;
+
+  /* Shadows & Glows */
+  --glow-white: 0 0 40px rgba(255, 255, 255, 0.15);
+  --glow-gold: 0 0 50px rgba(245, 158, 11, 0.2);
+  --glow-green: 0 0 30px rgba(34, 197, 94, 0.2);
+  --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+
+  /* Transitions */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}

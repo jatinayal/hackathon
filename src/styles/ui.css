@@ -1,0 +1,119 @@
+/* Floating Tool Button */
+.floating-tool-btn {
+  position: fixed;
+  right: 28px;
+  top: 96px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transition: all var(--transition-fast);
+}
+
+.floating-tool-btn:hover {
+  transform: scale(1.08) rotate(15deg);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
+}
+
+/* Live Toast Notification */
+.live-toast-wrapper {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: toastSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.live-toast {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(14, 26, 20, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 14px;
+  padding: 12px 18px 12px 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(34, 197, 94, 0.15);
+  color: #ffffff;
+}
+
+.toast-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #15803d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.toast-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.toast-action {
+  font-size: 0.78rem;
+  color: #86efac;
+}
+
+.toast-close-btn {
+  background: none;
+  border: none;
+  color: #6ee7b7;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+  margin-left: 6px;
+}
+
+.toast-close-btn:hover {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .floating-tool-btn {
+    top: auto;
+    bottom: 24px;
+    left: 20px;
+    right: auto;
+  }
+
+  .live-toast-wrapper {
+    bottom: 80px;
+    right: 16px;
+    left: 16px;
+  }
+}
