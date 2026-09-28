@@ -1,5 +1,33 @@
-import React from 'react';
-import interviewImg from '../../assets/images/sale_icon.jpg';
+import React, { useEffect, useRef } from 'react';
+
+function CardVideo({ src, label, className }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const video = ref.current;
+    let disposed = false;
+    const removeRetry = () => {
+      document.removeEventListener('pointerdown', play);
+      document.removeEventListener('keydown', play);
+    };
+    const play = () => {
+      if (disposed) return;
+      video.play()?.then(removeRetry).catch(() => {
+        // Some mobile/browser policies still reject muted autoplay. Keep the
+        // loaded frame and retry on a user gesture without showing controls.
+        if (disposed) return;
+        document.addEventListener('pointerdown', play);
+        document.addEventListener('keydown', play);
+      });
+    };
+    video.muted = true;
+    video.defaultMuted = true;
+    play();
+    return () => { disposed = true; removeRetry(); };
+  }, [src]);
+
+  return <video ref={ref} src={src} className={className} aria-label={label}
+    autoPlay muted loop playsInline controls={false} preload="auto" />;
+}
 
 export const WhyChooseUsSection = () => {
   const weeklyData = [
@@ -27,8 +55,8 @@ export const WhyChooseUsSection = () => {
         {/* 4 Bento Grid Cards */}
         <div className="why-grid">
           {/* Card 1: Interview Preparation */}
-          <div className="why-card">
-            <div>
+          <div className="why-card why-media-card">
+            <div className="why-card-copy">
               <h3 className="why-card-title">
                 <span>Interview</span> Preparation
               </h3>
@@ -39,99 +67,40 @@ export const WhyChooseUsSection = () => {
 
             <div className="interview-visual">
               <img
-                src={interviewImg}
+                src="https://dolia18uq98lp.cloudfront.net/sale-icons/7ebc7314-dcfe-4e82-a2cb-677df6f9c57e.jpg"
                 alt="Interview Preparation"
-                style={{
-                  maxWidth: '220px',
-                  objectFit: 'contain',
-                  filter: 'brightness(1.1) contrast(1.1)'
-                }}
+                className="why-interview-media"
               />
             </div>
           </div>
 
           {/* Card 2: AI Support */}
-          <div className="why-card" style={{ alignItems: 'center', textAlign: 'center' }}>
-            <h3 className="why-card-title">AI Support</h3>
+          <div className="why-card why-media-card" style={{ textAlign: 'center' }}>
+            <div className="why-card-copy">
+              <h3 className="why-card-title">AI Support</h3>
+            </div>
 
             <div className="ai-visual">
-              <div className="robot-container">
-                <svg
-                  width="180"
-                  height="170"
-                  viewBox="0 0 180 170"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Speech Bubble */}
-                  <rect x="15" y="65" width="46" height="32" rx="14" fill="#38bdf8" fillOpacity="0.2" stroke="#38bdf8" strokeWidth="1.5" />
-                  <circle cx="28" cy="81" r="3" fill="#38bdf8" />
-                  <circle cx="38" cy="81" r="3" fill="#38bdf8" />
-                  <circle cx="48" cy="81" r="3" fill="#38bdf8" />
-
-                  {/* Robot Head Antenna */}
-                  <line x1="105" y1="20" x2="105" y2="40" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" />
-                  <circle cx="105" cy="16" r="6" fill="#38bdf8" />
-
-                  {/* Robot Head */}
-                  <rect x="65" y="40" width="80" height="66" rx="28" fill="#1e293b" stroke="#38bdf8" strokeWidth="2" />
-                  {/* Screen Face */}
-                  <rect x="75" y="50" width="60" height="46" rx="18" fill="#0f172a" />
-                  {/* Cute Cyan Eyes */}
-                  <path d="M86 68 Q92 62 98 68" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-                  <path d="M112 68 Q118 62 124 68" stroke="#38bdf8" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-                  {/* Smile */}
-                  <path d="M100 82 Q105 88 110 82" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-
-                  {/* Robot Body */}
-                  <path d="M75 110 Q105 105 135 110 L145 150 Q105 160 65 150 Z" fill="#1e293b" stroke="#38bdf8" strokeWidth="2" />
-                  <circle cx="105" cy="132" r="8" fill="#38bdf8" fillOpacity="0.3" stroke="#38bdf8" strokeWidth="1.5" />
-
-                  {/* Waving Arm */}
-                  <path d="M142 118 Q165 110 162 90" stroke="#38bdf8" strokeWidth="5" strokeLinecap="round" fill="none" />
-                </svg>
-              </div>
+              <CardVideo
+                src="https://dolia18uq98lp.cloudfront.net/Videos/website_video.mp4"
+                label="AI Support" className="why-ai-media"
+              />
             </div>
           </div>
 
           {/* Card 3: Projects Based Learning */}
-          <div className="why-card">
-            <div>
+          <div className="why-card why-media-card">
+            <div className="why-card-copy">
               <h3 className="why-card-title">
                 <span>Projects</span> Based Learning
               </h3>
             </div>
 
             <div className="projects-visual">
-              <svg
-                width="220"
-                height="150"
-                viewBox="0 0 220 150"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Flowchart nodes */}
-                <rect x="20" y="20" width="65" height="35" rx="8" fill="#1e1b4b" stroke="#818cf8" strokeWidth="1.5" />
-                <text x="32" y="42" fill="#c7d2fe" fontSize="10" fontFamily="monospace">API</text>
-
-                <path d="M85 37 L120 37" stroke="#818cf8" strokeWidth="2" strokeDasharray="3 3" />
-
-                <polygon points="140,20 175,37 140,54 105,37" fill="#2e1065" stroke="#c084fc" strokeWidth="1.5" />
-
-                <path d="M140 54 L140 85" stroke="#c084fc" strokeWidth="2" />
-
-                <rect x="110" y="85" width="60" height="32" rx="6" fill="#1e293b" stroke="#94a3b8" strokeWidth="1.5" />
-
-                {/* Robotic Touch Hand */}
-                <path
-                  d="M30 135 L60 90 L85 95 L95 105 L60 145 Z"
-                  fill="#6b21a8"
-                  fillOpacity="0.7"
-                  stroke="#a855f7"
-                  strokeWidth="2"
-                />
-                <circle cx="85" cy="95" r="4" fill="#a855f7" />
-              </svg>
+              <CardVideo
+                src="https://dolia18uq98lp.cloudfront.net/Videos/website_video2.mp4"
+                label="Projects Based Learning" className="why-projects-media"
+              />
             </div>
           </div>
 

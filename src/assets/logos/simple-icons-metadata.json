@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Apple",
+    "slug": "apple",
+    "hex": "000000",
+    "source": "https://www.apple.com"
+  },
+  {
+    "title": "Cisco",
+    "slug": "cisco",
+    "hex": "1BA0D7",
+    "source": "https://www.cisco.com"
+  },
+  {
+    "title": "Facebook",
+    "slug": "facebook",
+    "hex": "0866FF",
+    "source": "https://about.meta.com/brand/resources/facebook/logo",
+    "guidelines": "https://about.meta.com/brand/resources/facebook/logo"
+  },
+  {
+    "title": "Netflix",
+    "slug": "netflix",
+    "hex": "E50914",
+    "source": "https://brand.netflix.com/en/assets/logos",
+    "guidelines": "https://brand.netflix.com/en/assets/logos"
+  },
+  {
+    "title": "PayPal",
+    "slug": "paypal",
+    "hex": "002991",
+    "source": "https://www.paypal.com/us",
+    "guidelines": "https://newsroom.paypal-corp.com/media-resources"
+  }
+]

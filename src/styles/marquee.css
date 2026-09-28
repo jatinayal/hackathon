@@ -29,9 +29,23 @@
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 60px;
   width: max-content;
   animation: scrollMarquee 30s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 60px;
+  padding-right: 60px;
+}
+
+.marquee-logo {
+  display: block;
+  width: 120px;
+  height: 34px;
+  object-fit: contain;
 }
 
 .marquee-track:hover {
@@ -48,15 +62,14 @@
   align-items: center;
   justify-content: center;
   height: 48px;
-  min-width: 120px;
-  opacity: 0.85;
+  flex: 0 0 120px;
+  width: 120px;
+  opacity: 1;
   transition: all var(--transition-fast);
-  filter: grayscale(0.2);
 }
 
 .marquee-item:hover {
   opacity: 1;
-  filter: grayscale(0);
   transform: scale(1.08);
 }
 
@@ -80,3 +93,10 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Cisco's source includes extra vertical whitespace in its square viewBox. */
+.marquee-logo-wide-icon { width: 64px; height: 64px; }
